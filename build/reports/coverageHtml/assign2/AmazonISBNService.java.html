@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AmazonISBNService.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assign2</a> &gt; <a href="index.source.html" class="el_package">assign2</a> &gt; <span class="el_source">AmazonISBNService.java</span></div><h1>AmazonISBNService.java</h1><pre class="source lang-java linenums">package assign2;
+
+import java.io.IOException;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+<span class="fc" id="L10">public class AmazonISBNService implements ISBNService {</span>
+  static Integer actualReview;
+  static String title;
+  static Document doc;
+
+  public static String parseTitle() throws IOException { 
+<span class="fc" id="L16">    doc = Jsoup.connect(&quot;https://www.google.com/&quot;).get();</span>
+<span class="fc" id="L17">    title = doc.title();</span>
+<span class="fc" id="L18">    return title;</span>
+  }
+
+  public static Integer parseReviewFromHtml() throws IOException {
+    
+<span class="fc" id="L23">      doc = Jsoup.connect(&quot;http://www.amazon.com/exec/obidos/ASIN/1576877655&quot;)</span>
+<span class="fc" id="L24">            .get();</span>
+<span class="fc" id="L25">    Element reviews = doc.getElementById(&quot;averageCustomerReviews&quot;);</span>
+<span class="fc" id="L26">    String[] reviewSplitToGetValue = reviews.text().split(&quot; &quot;);</span>
+<span class="fc" id="L27">    return Integer.parseInt(reviewSplitToGetValue[0]);</span>
+
+  }
+ 
+   @Override
+  public ImmutablePair&lt;String, Integer&gt; parseForISBN(String isbnNumber)
+      throws IOException {
+
+<span class="fc" id="L35">    doc = Jsoup.connect(&quot;http://www.amazon.com/exec/obidos/ASIN/&quot; + isbnNumber)</span>
+<span class="fc" id="L36">        .get();</span>
+<span class="fc" id="L37">    title = doc.title();</span>
+
+<span class="fc" id="L39">    Element reviews = doc.getElementById(&quot;averageCustomerReviews&quot;);</span>
+<span class="fc bfc" id="L40" title="All 4 branches covered.">    if(reviews == null || reviews.text().equals(&quot;Be the first to review this item&quot;))</span>
+<span class="fc" id="L41">      actualReview = 0;</span>
+   
+    else{
+<span class="fc" id="L44">    String[] reviewSplitToGetValue = reviews.text().split(&quot; &quot;);</span>
+<span class="fc" id="L45">    actualReview = Integer.parseInt(reviewSplitToGetValue[0]</span>
+<span class="fc" id="L46">        .replaceAll(&quot;,&quot;, &quot;&quot;));</span>
+    }
+<span class="fc" id="L48">    return ImmutablePair.of(title, actualReview);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

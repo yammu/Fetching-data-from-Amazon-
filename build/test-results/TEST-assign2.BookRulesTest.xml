@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assign2.BookRulesTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2015-07-11T22:44:44" hostname="Yams" time="0.933">
+  <properties/>
+  <testcase name="totalNumberOfReviewsInEmptyListIsZero" classname="assign2.BookRulesTest" time="0.0"/>
+  <testcase name="oneImmutablePairOfListGivesSameListBack" classname="assign2.BookRulesTest" time="0.002"/>
+  <testcase name="totalNumberOfReviewsInAListHavingDublicatePairsIsTotalOfTheirReviews" classname="assign2.BookRulesTest" time="0.0"/>
+  <testcase name="getInfoAndTotalReviewsForIsbnWhenGivenTwoISBNSAreValidAndOneIsInvalid" classname="assign2.BookRulesTest" time="0.876"/>
+  <testcase name="getInfoFromIsbnWhenThereIsAnErrorInIsbnNumber" classname="assign2.BookRulesTest" time="0.006"/>
+  <testcase name="dublicateImmutablePairsOfListGivesSortedListOfImmutablePairs" classname="assign2.BookRulesTest" time="0.002"/>
+  <testcase name="getInfoAndTotalReviewsForIsbnWhenGivenThreeISBNSAreValid" classname="assign2.BookRulesTest" time="0.014"/>
+  <testcase name="totalNumberOfReviewsInAListHavingThreePairsIsTotalOfThoseThreeReviews" classname="assign2.BookRulesTest" time="0.001"/>
+  <testcase name="twoImmutablePairsOfListGivesSortedListOfThosePairs" classname="assign2.BookRulesTest" time="0.001"/>
+  <testcase name="totalNumberOfReviewsInTwoImmutablePairOfListIsTotalOfTheirReviews" classname="assign2.BookRulesTest" time="0.001"/>
+  <testcase name="getInfoFromIsbnWhenIsbnNumberIsTheDefaultOne" classname="assign2.BookRulesTest" time="0.002"/>
+  <testcase name="totalNumberOfReviewsInOneImmutablePairOfListIsItsReviewItself" classname="assign2.BookRulesTest" time="0.001"/>
+  <testcase name="threeImmutablePairsOfListGivesSortedListOfThreeImmutablePairs" classname="assign2.BookRulesTest" time="0.001"/>
+  <testcase name="emptyListOfTitlesGivesEmptyList" classname="assign2.BookRulesTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

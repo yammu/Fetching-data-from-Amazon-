@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BookRules.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assign2</a> &gt; <a href="index.source.html" class="el_package">assign2</a> &gt; <span class="el_source">BookRules.java</span></div><h1>BookRules.java</h1><pre class="source lang-java linenums">package assign2;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.*;
+
+<span class="fc" id="L12">public class BookRules {</span>
+<span class="fc" id="L13">  ISBNService theService = new AmazonISBNService();</span>
+ 
+  public static List&lt;ImmutablePair&lt;String, Integer&gt;&gt; sortOnTitles(List&lt;ImmutablePair&lt;String, Integer&gt;&gt;  unsortedTitles) 
+  {
+<span class="fc" id="L17">    return unsortedTitles.stream()</span>
+<span class="fc" id="L18">                         .sorted(comparing(ImmutablePair::getLeft))</span>
+<span class="fc" id="L19">                         .collect(toList());</span>
+  }
+  
+  
+  public static int totalNumberOfReviews(List&lt;ImmutablePair&lt;String, Integer&gt;&gt; unsortedTitles) 
+  {
+<span class="fc" id="L25">    return unsortedTitles.stream()</span>
+<span class="fc" id="L26">                         .mapToInt(ImmutablePair::getRight)</span>
+<span class="fc" id="L27">                         .sum();                      </span>
+  }
+  
+  
+  public void setISBNService(ISBNService isbnService)
+  {
+<span class="fc" id="L33">      theService = isbnService; </span>
+<span class="fc" id="L34">  }</span>
+  
+ 
+   public ImmutablePair&lt;ImmutablePair&lt;String, Integer&gt;, Exception&gt; getInfoForISBN(String a_SAMPLE_ISBN)
+   {
+      try{
+<span class="fc" id="L40">       return ImmutablePair.of(theService.parseForISBN(a_SAMPLE_ISBN), null);</span>
+<span class="fc" id="L41">      }catch(Exception ex){</span>
+<span class="fc" id="L42">       return ImmutablePair.of(null, ex);</span>
+      }
+   
+   }
+   
+
+  public ImmutableTriple&lt;List&lt;ImmutablePair&lt;String, Integer&gt;&gt;, Integer, List&lt;Exception&gt;&gt; getReviewsForISBNs(
+    List&lt;String&gt; isbnNumbers)
+  {
+<span class="fc" id="L51">      List&lt;ImmutablePair&lt;ImmutablePair&lt;String, Integer&gt;, Exception&gt;&gt; result =</span>
+<span class="fc" id="L52">        isbnNumbers.stream()</span>
+<span class="fc" id="L53">                   .map(isbn -&gt; getInfoForISBN(isbn))</span>
+<span class="fc" id="L54">                   .collect(toList());</span>
+                   
+<span class="fc" id="L56">      List&lt;ImmutablePair&lt;String, Integer&gt;&gt; infoList = </span>
+<span class="fc" id="L57">        result.stream()</span>
+<span class="fc" id="L58">              .filter(info -&gt; info.getLeft() != null)</span>
+<span class="fc" id="L59">              .map(ImmutablePair::getLeft)</span>
+<span class="fc" id="L60">              .collect(toList());</span>
+              
+<span class="fc" id="L62">      List&lt;Exception&gt; ex = </span>
+<span class="fc" id="L63">        result.stream()</span>
+<span class="fc" id="L64">              .filter(info -&gt; info.getRight() != null)</span>
+<span class="fc" id="L65">              .map(ImmutablePair::getRight)</span>
+<span class="fc" id="L66">              .collect(toList());</span>
+     
+<span class="fc" id="L68">     return ImmutableTriple.of(sortOnTitles(infoList), totalNumberOfReviews(infoList), ex);</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

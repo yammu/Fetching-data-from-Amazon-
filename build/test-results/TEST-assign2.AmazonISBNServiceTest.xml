@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="assign2.AmazonISBNServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2015-07-11T22:44:24" hostname="Yams" time="19.474">
+  <properties/>
+  <testcase name="checkForLargerReviewsRemovingCommaInBetween" classname="assign2.AmazonISBNServiceTest" time="2.949"/>
+  <testcase name="checkReviewIsValidReturnedFromImmutalbePair" classname="assign2.AmazonISBNServiceTest" time="1.684"/>
+  <testcase name="checkTotalReviewAreValidReturnedFromTheImmutableTriple" classname="assign2.AmazonISBNServiceTest" time="5.937"/>
+  <testcase name="returnReviewAsZeroIfThereisNoReviewWritten" classname="assign2.AmazonISBNServiceTest" time="1.765"/>
+  <testcase name="returnReviewAsZeroIfReviewIsMissing" classname="assign2.AmazonISBNServiceTest" time="1.584"/>
+  <testcase name="getTheTitleFromHtmlPage" classname="assign2.AmazonISBNServiceTest" time="1.77"/>
+  <testcase name="checkTitleIsValidReturnedFromImmutablePair" classname="assign2.AmazonISBNServiceTest" time="1.811"/>
+  <testcase name="invalidIsbnThrowsAnException" classname="assign2.AmazonISBNServiceTest" time="0.124"/>
+  <testcase name="getTheReviewOfBookFromHtmlPage" classname="assign2.AmazonISBNServiceTest" time="1.833"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
